@@ -213,6 +213,7 @@ class _OHLCVPainter extends CustomPainter {
 
     final double heightNormalizer = height / (_max - _min);
     final double rectWidth = width / data.length;
+    final double space = 5.0;
 
     double rectLeft;
     double rectTop;
@@ -224,7 +225,7 @@ class _OHLCVPainter extends CustomPainter {
     // Loop through all data
     for (int i = 0; i < data.length; i++) {
       rectLeft = (i * rectWidth) + lineWidth / 2;
-      rectRight = ((i + 1) * rectWidth) - lineWidth / 2;
+      rectRight = ((i + 1) * rectWidth) - lineWidth / 2 -space;
 
       double volumeBarTop = (height + volumeHeight) -
           (data[i]["volumeto"] * volumeNormalizer - lineWidth / 2);
@@ -292,13 +293,21 @@ class _OHLCVPainter extends CustomPainter {
           ..color = Colors.grey
           ..strokeWidth = 3.0;
       canvas.drawLine(
-          new Offset(rectLeft + rectWidth / 2 - lineWidth / 2, rectBottom),
-          new Offset(rectLeft + rectWidth / 2 - lineWidth / 2, low),
+          new Offset(rectLeft + rectWidth / 2 - lineWidth / 2 - space/2, rectBottom),
+          new Offset(rectLeft + rectWidth / 2 - lineWidth / 2 - space/2, low),
           rectPaint);
       canvas.drawLine(
-          new Offset(rectLeft + rectWidth / 2 - lineWidth / 2, rectTop),
-          new Offset(rectLeft + rectWidth / 2 - lineWidth / 2, high),
+          new Offset(rectLeft + rectWidth / 2 - lineWidth / 2 - space/2, rectTop),
+          new Offset(rectLeft + rectWidth / 2 - lineWidth / 2 - space/2, high),
           rectPaint);
+      // canvas.drawLine(
+      //     new Offset(rectLeft + rectWidth / 2 - lineWidth / 2, rectBottom),
+      //     new Offset(rectLeft + rectWidth / 2 - lineWidth / 2, low),
+      //     rectPaint);
+      // canvas.drawLine(
+      //     new Offset(rectLeft + rectWidth / 2 - lineWidth / 2, rectTop),
+      //     new Offset(rectLeft + rectWidth / 2 - lineWidth / 2, high),
+      //     rectPaint);
     }
   }
 
