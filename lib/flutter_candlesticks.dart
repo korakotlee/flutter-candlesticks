@@ -208,7 +208,7 @@ class _OHLCVPainter extends CustomPainter {
       }
 
       // Label volume line
-      maxVolumePainter.paint(canvas, new Offset(0.0, gridLineY + 2.0));
+      // maxVolumePainter.paint(canvas, new Offset(0.0, gridLineY + 2.0));
     }
 
     final double heightNormalizer = height / (_max - _min);
@@ -290,8 +290,8 @@ class _OHLCVPainter extends CustomPainter {
       double low = height - (data[i]["low"] - _min) * heightNormalizer;
       double high = height - (data[i]["high"] - _min) * heightNormalizer;
         rectPaint = new Paint()
-          ..color = Colors.grey
-          ..strokeWidth = 3.0;
+          ..color = data[i]["open"] > data[i]["close"] ? decreaseColor : increaseColor
+          ..strokeWidth = 2.0;
       canvas.drawLine(
           new Offset(rectLeft + rectWidth / 2 - lineWidth / 2 - space/2, rectBottom),
           new Offset(rectLeft + rectWidth / 2 - lineWidth / 2 - space/2, low),
